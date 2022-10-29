@@ -1,11 +1,15 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../store";
+import { useState } from "react";
 import AddBill from "./AddBill";
+import BillTable from "./BillTable";
+import Modal from "./Modal";
 const Bills = () => {
-  const bills = useSelector((state: RootState) => state.bills.bills);
+  const [addBillOpen, setAddBillOpen] = useState(false);
   return (
     <div>
-      <AddBill />
+      <Modal isOpen={addBillOpen} setIsOpen={setAddBillOpen} title="Add Bill">
+        <AddBill />
+      </Modal>
+      <BillTable />
     </div>
   );
 };

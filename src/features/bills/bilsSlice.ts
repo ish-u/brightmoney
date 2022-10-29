@@ -14,7 +14,37 @@ export interface BillState {
 }
 
 const initialState: BillState = {
-  bills: [],
+  bills: [
+    {
+      id: "0.4051722127781501",
+      category: "Food",
+      date: 1667059751482,
+      description: "a",
+      amount: 120,
+    },
+    {
+      id: "0.2885748587106549",
+      category: "Food",
+      date: 1667059751482,
+      description: "a",
+      amount: 120,
+    },
+    {
+      id: "0.5987014431107078",
+      category: "Food",
+      date: 1667059751482,
+      description: "fsafasgfa",
+      amount: 120,
+    },
+    {
+      id: "0.1241199743859498",
+      category: "Food",
+      date: 1667059751482,
+      description:
+        "fsafasgfafsafasgfafsafasgfafsafasgfafsafasgfafsafasgfafsafasgfa",
+      amount: 120,
+    },
+  ],
 };
 
 export const billSlice = createSlice({
@@ -24,8 +54,17 @@ export const billSlice = createSlice({
     add: (state, action: PayloadAction<Bill>) => {
       state.bills = [...state.bills, action.payload];
     },
-    remove: (state, action: PayloadAction<Bill>) => {},
-    edit: (state, action: PayloadAction<Bill>) => {},
+    remove: (state, action: PayloadAction<string>) => {
+      state.bills = state.bills.filter((bill) => bill.id !== action.payload);
+    },
+    edit: (state, action: PayloadAction<Bill>) => {
+      for (var i = 0; i < state.bills.length; i++) {
+        if (state.bills[i].id === action.payload.id) {
+          state.bills[i] = action.payload;
+          break;
+        }
+      }
+    },
   },
 });
 
